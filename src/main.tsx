@@ -1,13 +1,26 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import App from './App'
-import { BrowserRouter, Route } from 'react-router-dom'
+import { AppLayout } from './AppLayout'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { LoginPage, AuthGuard, AuthProvider } from './components/auth'
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Route path="/" element={<App />} />
+      <AuthProvider>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/"
+            element={
+              <AuthGuard>
+                <AppLayout />
+              </AuthGuard>
+            }
+          />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

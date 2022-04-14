@@ -3,13 +3,12 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import { AppLayout } from './AppLayout'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { LoginPage, AuthGuard } from './components/auth'
-import { AuthProvider } from './components/auth/AuthContext'
+import { LoginPage, AuthGuard, AuthProvider } from './components/auth'
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route
@@ -21,8 +20,8 @@ ReactDOM.render(
             }
           />
         </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+      </AuthProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 )

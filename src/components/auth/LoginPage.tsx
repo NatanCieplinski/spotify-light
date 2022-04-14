@@ -1,6 +1,12 @@
 import queryString from 'query-string'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from './AuthContext'
 
 export const LoginPage: React.FC = () => {
+  const { access_token } = useAuth()
+  const navigate = useNavigate()
+
   const url =
     'https://accounts.spotify.com/authorize?' +
     queryString.stringify({
@@ -10,6 +16,12 @@ export const LoginPage: React.FC = () => {
       response_type: 'token',
       redirect_uri: 'http://localhost:3000/',
     })
+
+  useEffect(() => {
+    if (access_token) {
+      navigate('/', { replace: true })
+    }
+  }, [access_token])
 
   return (
     <div>
